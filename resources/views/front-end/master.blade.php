@@ -16,6 +16,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="{{asset('/')}}front/js/jquery.min.js"></script>
 </head>
 <body>
+
 <style>
 
 /* Dropdown Button */
@@ -125,6 +126,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<label></label>
 					
 					<ul>
+					
+					{{ Form::open(['route'=>'search', 'method'=>'POST','class'=>'form-horizontal'])}}
+				
+						<li><input type="text" name="BookName" placeholder="search"></li>
+						
+						@if($errors->has('BookName'))
+							<span class="text text-danger">can't be empty</span>
+						@endif
+					{{ Form::close() }}
+					
 					@foreach($catagories as $catagory)
 						<li><a href="{{route('BooksCatagoryView',['id'=>$catagory->id,'name'=>$catagory->name])}}">{{$catagory->name}}</a></li>
 				    @endforeach
