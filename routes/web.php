@@ -256,6 +256,7 @@ Route::get('/books/{name}/{id}',[
 ]);
 
 
+
 Route::post('/blog/comment',[
     'uses' => 'CommentController@Comment',
     'as' => 'comment'
@@ -342,6 +343,11 @@ Route::post('/send-message',[
     'as' => 'SendComposeMessage',
     'middleware' => 'UserMiddleWare'
     
+]);
+
+Route::post('/books/search-result',[
+    'uses' => 'BookController@SearchBook',
+    'as' => 'search'
 ]);
 
 
