@@ -118,6 +118,21 @@ class BookController extends Controller
         return view('front-end.books.Viewbooks',['books'=>$books,'catagories'=>$catagories]);
         
     }
+    public function SearchBook(Request $request){
+       
+        $this->validate( $request,[
+           'BookName' => 'required' 
+        ]);
+        $name = $request->BookName; 
+        $books = DB::table('books')->where('title','LIKE','%'.$name.'%')->orWhere('author','LIKE','%'.$name.'%')->paginate('12');
+        $catagories = BookCatagory::all();
+        if(!$books->isEmpty())
+            return view('front-end.books.Viewbooks',['books'=>$books,'catagories'=>$catagories]);
+        else
+            return view('front-end.books.SearchNotFound',['catagories'=>$catagories]);
+    }
+
+    
     public function ReadBook($id){
         $book = Book::find($id);
         $catagories = BookCatagory::all();
